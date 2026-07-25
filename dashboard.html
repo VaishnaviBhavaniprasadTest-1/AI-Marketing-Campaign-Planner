@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — AI Campaign Planner</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SheetJS/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+<div class="particles"></div>
+<div class="grain"></div>
+
+<div class="shell">
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-inner glass">
+        <div class="brand">
+          <div class="brand-dot"></div>
+          Campaign Planner
+        </div>
+        <div class="user-chip">
+          <div class="avatar" id="avatarInitial">–</div>
+          <span id="userEmail">Loading…</span>
+          <button class="btn btn-ghost btn-sm magnetic" id="logoutBtn">Log Out</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container page">
+
+    <div class="section-head reveal">
+      <span class="eyebrow">New Campaign</span>
+      <h2>Describe your product. Get a full campaign.</h2>
+    </div>
+
+    <div class="grid-2">
+      <!-- Input panel -->
+      <div class="glass panel reveal">
+        <div class="panel-title">Product / Offer Description</div>
+        <p style="font-size:13px; margin-bottom:16px;">Be specific — audience, price point, what makes it different. The more detail, the sharper the campaign.</p>
+
+        <div class="field">
+          <textarea class="input" id="productInput" placeholder="e.g. A subscription box for organic pet food targeting eco-conscious dog owners aged 25–40 in urban US cities. Price: $39/mo. USP: locally sourced, vet-formulated, zero plastic packaging."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Optional: Upload a CSV of Market Research</label>
+          <div class="upload-zone" id="uploadZone">
+            <span id="uploadLabel">Drop a .csv / .xlsx file, or click to browse</span>
+          </div>
+          <input type="file" id="excelInput" accept=".csv,.xlsx,.xls" style="display:none" />
+          <div class="hint-text" id="excelSummary"></div>
+        </div>
+
+        <button class="btn btn-primary btn-block magnetic" id="generateBtn">
+          ✦ Generate Campaign
+        </button>
+        <div class="error-text" id="generateError"></div>
+      </div>
+
+      <!-- Saved campaigns -->
+      <div class="glass panel reveal">
+        <div class="panel-title">Your Campaigns</div>
+        <p style="font-size:13px; margin-bottom:16px;">Saved to your account. Click to reload, or export as Markdown.</p>
+        <div id="campaignList">
+          <div class="empty-state">No campaigns yet. Generate your first one →</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div id="resultsWrap" style="display:none;">
+      <div class="section-head reveal">
+        <span class="eyebrow">Generated Output</span>
+      </div>
+      <div class="glass panel" style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-ghost btn-sm magnetic" id="exportBtn">⤓ Export as .md</button>
+        <button class="btn btn-ghost btn-sm magnetic" id="saveBtn">✓ Save Campaign</button>
+      </div>
+      <div id="resultsContent"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="loading-overlay">
+  <div class="loader-ring"><span></span><span></span></div>
+  <div class="loading-text">GENERATING CAMPAIGN</div>
+  <div class="loading-sub">Prompting the model…</div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/excel-parser.js"></script>
+<script src="js/ai-engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

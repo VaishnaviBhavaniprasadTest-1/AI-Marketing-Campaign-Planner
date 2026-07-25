@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Campaign Planner — Launch Smarter Marketing</title>
+<meta name="description" content="Generate complete AI-powered marketing campaigns in seconds." />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Tailwind (utility helpers only — design system lives in styles.css) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+<div class="particles"></div>
+<div class="grain"></div>
+
+<div class="shell auth-wrap">
+  <div class="auth-card glass" id="authCard">
+
+    <div class="brand-mark reveal">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#050208"/></svg>
+    </div>
+
+    <span class="eyebrow reveal">AI-Powered Growth</span>
+    <h1 class="reveal" style="font-size:26px; margin-top:10px;">
+      <span class="gradient-text">Campaign Planner</span>
+    </h1>
+    <p class="reveal" style="margin-top:8px; font-size:14px;">Sign in to generate full marketing campaigns in one click.</p>
+
+    <div class="tabs reveal">
+      <div class="tab-indicator" id="tabIndicator"></div>
+      <div class="tab active" id="tabLogin">Log In</div>
+      <div class="tab" id="tabSignup">Sign Up</div>
+    </div>
+
+    <form id="authForm" class="reveal">
+      <div class="field">
+        <label for="email">Email</label>
+        <input class="input" type="email" id="email" placeholder="you@company.com" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input class="input" type="password" id="password" placeholder="••••••••" required minlength="6" autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block magnetic" id="submitBtn">
+        <span id="submitLabel">Log In</span>
+      </button>
+      <div class="error-text" id="authError"></div>
+    </form>
+
+    <p class="footer-note" style="margin-top:22px;">Free forever. Your data stays private, secured by row-level security.</p>
+  </div>
+</div>
+
+<div class="loading-overlay">
+  <div class="loader-ring"><span></span><span></span></div>
+  <div class="loading-text">AUTHENTICATING</div>
+  <div class="loading-sub">Securing your session…</div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
